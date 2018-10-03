@@ -1,17 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <PackageId>MikeDg.IdentityServer4.MongoDB</PackageId>
-    <PackageTags>IdentityServer4;MongoDB</PackageTags>
-    <RepositoryUrl>https://github.com/microserviceph/IdentityServer4.MongoDB</RepositoryUrl>
+    <PackageId>spitfyr.IdentityServer4.GcpDatastore</PackageId>
+    <PackageTags>IdentityServer4 gcp datastore .net</PackageTags>
+    <RepositoryUrl>https://github.com/spitfyr86/IdentityServer4.GcpDatastore.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <PackageProjectUrl>https://github.com/microserviceph/IdentityServer4.MongoDB</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/microserviceph/IdentityServer4.MongoDB/blob/master/LICENSE</PackageLicenseUrl>
-    <Company>Vsslabs</Company>
-    <Authors>Michael de Guzman</Authors>
-    <Description>A IdentityServer4 MongoDB storage</Description>
+    <PackageProjectUrl>https://github.com/spitfyr86/IdentityServer4.GcpDatastore</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/spitfyr86/IdentityServer4.GcpDatastore/blob/master/LICENSE</PackageLicenseUrl>
+    <Company>Dennis Laping</Company>
+    <Authors>Dennis Laping</Authors>
+    <Description>Google Cloud Datastore persistence layer for IdentityServer4</Description>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.0.1</Version>
+    <Version>1.0.0</Version>
+    <PackageReleaseNotes>Initial implementation</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Google.Cloud.Datastore.V1" Version="2.1.0" />
