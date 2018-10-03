@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <PackageId>MikeDg.IdentityServer4.MongoDB</PackageId>
+    <PackageTags>IdentityServer4;MongoDB</PackageTags>
+    <RepositoryUrl>https://github.com/microserviceph/IdentityServer4.MongoDB</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageProjectUrl>https://github.com/microserviceph/IdentityServer4.MongoDB</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/microserviceph/IdentityServer4.MongoDB/blob/master/LICENSE</PackageLicenseUrl>
+    <Company>Vsslabs</Company>
+    <Authors>Michael de Guzman</Authors>
+    <Description>A IdentityServer4 MongoDB storage</Description>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>1.0.1</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Google.Cloud.Datastore.V1" Version="2.1.0" />
+    <PackageReference Include="IdentityServer4" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="2.1.1" />
+    <PackageReference Include="spitfyr.Google.Cloud.Datastore.Adapter" Version="1.0.0.1" />
+  </ItemGroup>
+</Project>
