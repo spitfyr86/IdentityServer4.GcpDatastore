@@ -90,7 +90,7 @@ namespace IdentityServer4.GcpDatastore.Stores
             }
             else
             {
-                await _dbContext.PersistedGrant.UpdateAsync(filter, Map(existing, grant));
+                await _dbContext.PersistedGrant.UpdateAsync(Map(existing, grant));
             }
         }
 
@@ -112,7 +112,7 @@ namespace IdentityServer4.GcpDatastore.Stores
         {
             if (existing == null)
                 existing = new Models.PersistedGrant();
-
+            
             existing.ClientId = grant.ClientId;
             existing.CreationTime = grant.CreationTime;
             existing.Data = grant.Data;
