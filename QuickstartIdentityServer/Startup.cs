@@ -32,16 +32,16 @@ namespace QuickstartIdentityServer
                 // support for Google Cloud Datastore
                 .AddConfigurationStore(option =>
                 {
-                    option.ProjectId = "maskedninja-dojo-01";
-                    option.Namespace = "dev";
-                    option.CredentialsFilePath = "./Datastore/gcp_datastore.json";
+                    option.ProjectId = "[YOUR-PROJECT-ID]";
+                    option.Namespace = "[YOUR-NAMESPACE]";
+                    option.CredentialsFilePath = ".[YOUR-PROJECT-SERVICE-KEY-FILEPATH]";
                 })
                 // this adds the operational data from DB (codes, tokens, consents)
                 .AddOperationalStore(option =>
                 {
-                    option.ProjectId = "maskedninja-dojo-01";
-                    option.Namespace = "dev";
-                    option.CredentialsFilePath = "./Datastore/gcp_datastore.json";
+                    option.ProjectId = "[YOUR-PROJECT-ID]";
+                    option.Namespace = "[YOUR-NAMESPACE]";
+                    option.CredentialsFilePath = ".[YOUR-PROJECT-SERVICE-KEY-FILEPATH]";
 
                     // this enables automatic token cleanup. this is optional.
                     option.EnableTokenCleanup = true;
