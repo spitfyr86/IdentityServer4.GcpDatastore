@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
-    <Version>1.0.0.1</Version>
+    <Version>1.0.0.2</Version>
     <Authors>VSS I. T. Development</Authors>
     <Company>VSS I. T. Development</Company>
     <Description>Google Cloud Datastore persistence layer for IdentityServer4. This version supports ASP .Net Core 1.1.</Description>
@@ -11,7 +11,7 @@
     <PackageProjectUrl>https://github.com/spitfyr86/IdentityServer4.GcpDatastore</PackageProjectUrl>
     <RepositoryUrl>https://github.com/spitfyr86/IdentityServer4.GcpDatastore.git</RepositoryUrl>
     <PackageTags>IdentityServer4 gcp datastore .netcore</PackageTags>
-    <PackageReleaseNotes>Downgraded target framework to .Net Core 1.1.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added sample project with reference to downgraded library.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
