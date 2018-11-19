@@ -6,7 +6,6 @@ using IdentityServer4.Models;
 using IdentityServer4.Stores;
 using Spitfyr.GCP.Datastore.Adapter;
 using Spitfyr.IdentityServer4.GcpDS.DbContext;
-using Spitfyr.IdentityServer4.GcpDS.Models;
 using ApiResource = IdentityServer4.Models.ApiResource;
 using IdentityResource = IdentityServer4.Models.IdentityResource;
 
@@ -48,9 +47,7 @@ namespace Spitfyr.IdentityServer4.GcpDS.Stores
         /// <returns></returns>
         public async Task<ApiResource> FindApiResourceAsync(string name)
         {
-            //var filter = Builders<Models.ApiResource>.Filter.Eq(u => u.Name, name);
             var filter = FilterBuilder<Models.ApiResource>.Equal(u => u.Name, name);
-
             var found = (await _dbContext.ApiResource.FindAsync(filter)).SingleOrDefault();
 
             return found.ToModel();
@@ -61,27 +58,15 @@ namespace Spitfyr.IdentityServer4.GcpDS.Stores
         /// </summary>
         public async Task<IEnumerable<ApiResource>> FindApiResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
-            /*
-            var apis =
-                from api in _dbContext.ApiResource.AsQueryable()
-                where api.Scopes.Where(x => names.Contains(x.Name)).Any()
-                select api;
-             or this?   
-
-            var filter = Builders<ApiResource>.Filter.Where(p => p.Scopes.Any(b => scopeNames.Contains(b.Name)));
-             */
-
-            //var records = await _dbContext.ApiResource
-            //    .FindAsync(u => u.Scopes.Any(s => names.Contains(s.Name)))
-
-            //TODO: Check if this works
-            //var filter = Filter.Equal("Scopes.Name", names);
             scopeNames = scopeNames ?? new List<string>();
 
-            var records = (await _dbContext.ApiResource.FindInAsync(new Dictionary<string, dynamic>
-            {
-                { "Scopes.Name", scopeNames.ToArray() }
-            })).ToList();
+            //var records = (await _dbContext.ApiResource.FindInAsync(new Dictionary<string, dynamic>
+            //{
+            //    { "Scopes.Name", scopeNames.ToArray() }
+            //})).ToList();
+
+            var apiResources = await _dbContext.ApiResource.GetAllAsync();
+            var records = apiResources.Where(x => scopeNames.Any(y => y == x.Name));
 
             return records.Select(Mapper.ToModel)
                 .ToList();
@@ -92,19 +77,16 @@ namespace Spitfyr.IdentityServer4.GcpDS.Stores
         /// </summary>
         public async Task<IEnumerable<IdentityResource>> FindIdentityResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
-            //var filter = Builders<Models.IdentityResource>.Filter.In(p => p.Name, scopeNames);
-            //TODO: Check if this works
-            //var filter = Filter.Equal("Scopes.Name", scopeNames.ToArray());
             scopeNames = scopeNames ?? new List<string>();
 
-            var records = (await _dbContext.IdentityResource.FindInAsync(new Dictionary<string, dynamic>
-            {
-                { "Name", scopeNames.ToArray() }
-                //{ "scanStatus", new[]{101,102,103} },
-                //{ "threatStatus", new[]{1001,1002,1003} },
-                //{ "lid", 1234 }
-            })).ToList();
+            //var records = (await _dbContext.IdentityResource.FindInAsync(new Dictionary<string, dynamic>
+            //{
+            //    { "Name", scopeNames.ToArray() }
+            //})).ToList();
 
+            var identityResources = await _dbContext.IdentityResource.GetAllAsync();
+            var records = identityResources.Where(x => scopeNames.Any(y => y == x.Name));
+            
             return records.Select(Mapper.ToModel)
                 .ToList();
         }
@@ -114,15 +96,9 @@ namespace Spitfyr.IdentityServer4.GcpDS.Stores
         /// </summary>
         public async Task<Resources> GetAllResourcesAsync()
         {
-            //var allApiFilter = Builders<Models.ApiResource>.Filter.Empty;
-            //var allIndenityFilter = Builders<Models.IdentityResource>.Filter.Empty;
-
-            //var apiResource = await _dbContext.ApiResource.Find(allApiFilter).ToListAsync();
-            //var identityResource = await _dbContext.IdentityResource.Find(allIndenityFilter).ToListAsync();
-
             var apiResource = await _dbContext.ApiResource.GetAllAsync();
             var identityResource = await _dbContext.IdentityResource.GetAllAsync();
-
+            
             return new Resources(identityResource.Select(Mapper.ToModel), apiResource.Select(Mapper.ToModel));
         }
     }

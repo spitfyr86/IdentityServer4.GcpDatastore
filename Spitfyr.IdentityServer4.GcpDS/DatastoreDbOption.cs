@@ -5,6 +5,7 @@ namespace Spitfyr.IdentityServer4.GcpDS
         public string CredentialsFilePath { get; set; }
         public string ProjectId { get; set; }
         public string Namespace { get; set; }
+        public string EntityPrefix { get; set; }
     }
 
     public class ConfigurationDbOption : GcpDatastoreOption

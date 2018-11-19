@@ -28,7 +28,7 @@ namespace Spitfyr.IdentityServer4.GcpDS.DbContext
 
                 var client = DatastoreClient.Create(channel);
                 var datastoreDb = DatastoreDb.Create(option.Value.ProjectId, option.Value.Namespace, client);
-                IDatastoreDatabase database = new DatastoreDatabase(datastoreDb);
+                IDatastoreDatabase database = new DatastoreDatabase(datastoreDb, option.Value.EntityPrefix);
 
                 Client = database.GetKind<Client>(option.Value.Client.Kind);
                 ApiResource = database.GetKind<ApiResource>(option.Value.ApiResource.Kind);
@@ -60,7 +60,7 @@ namespace Spitfyr.IdentityServer4.GcpDS.DbContext
 
                 var client = DatastoreClient.Create(channel);
                 var datastoreDb = DatastoreDb.Create(option.Value.ProjectId, option.Value.Namespace, client);
-                IDatastoreDatabase database = new DatastoreDatabase(datastoreDb);
+                IDatastoreDatabase database = new DatastoreDatabase(datastoreDb, option.Value.EntityPrefix);
 
                 PersistedGrant = database.GetKind<PersistedGrant>(option.Value.PersistedGrant.Kind);
             }

@@ -16,7 +16,7 @@ namespace Spitfyr.IdentityServer4.GcpDS
             // var options = new ConfigurationDBOption();
             // storeOptionsAction?.Invoke(options);
             // builder.Services.AddSingleton(options);
-            builder.Services.Configure<ConfigurationDbOption>(storeOptionsAction);
+            builder.Services.Configure(storeOptionsAction);
 
             builder.Services.AddTransient<IConfigurationDatastoreDbContext, ConfigurationDatastoreDbContext>();
 
@@ -27,19 +27,16 @@ namespace Spitfyr.IdentityServer4.GcpDS
             return builder;
         }
 
-        public static IIdentityServerBuilder AddOperationalStore(
-            this IIdentityServerBuilder builder,
+        public static IIdentityServerBuilder AddOperationalStore(this IIdentityServerBuilder builder,
             Action<OperationGcpDatastoreOption> storeOptionsAction = null)
         {
             // var options = new OperationGcpDatastoreOption();
             // storeOptionsAction?.Invoke(options);
-            builder.Services.Configure<OperationGcpDatastoreOption>(storeOptionsAction);
+            builder.Services.Configure(storeOptionsAction);
             // builder.Services.AddSingleton(options);
 
             builder.Services.AddTransient<IOperationDbContext, OperationDbContext>();
-
             builder.Services.AddTransient<IPersistedGrantStore, PersistedGrantStore>();
-
             builder.Services.AddSingleton<TokenCleanup>();
             //builder.Services.AddSingleton<IHostedService, TokenCleanupHost>();
 

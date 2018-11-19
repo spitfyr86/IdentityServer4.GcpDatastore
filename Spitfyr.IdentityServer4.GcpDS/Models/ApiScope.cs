@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Spitfyr.GCP.Datastore.Adapter.Serialization;
 
 namespace Spitfyr.IdentityServer4.GcpDS.Models
