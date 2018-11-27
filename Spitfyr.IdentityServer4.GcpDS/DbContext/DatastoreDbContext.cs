@@ -17,28 +17,16 @@ namespace Spitfyr.IdentityServer4.GcpDS.DbContext
 
     public class ConfigurationDatastoreDbContext : IConfigurationDatastoreDbContext
     {
-        public ConfigurationDatastoreDbContext(IOptions<ConfigurationDbOption> option)
+        public ConfigurationDatastoreDbContext(IDatastoreDatabase database, IOptions<ConfigurationDbOption> option)
         {
-            using (var stream = new FileStream(option.Value.CredentialsFilePath, FileMode.Open))
-            {
-                var googleCredential = GoogleCredential.FromStream(stream);
-                var channel = new Grpc.Core.Channel(
-                    DatastoreClient.DefaultEndpoint.Host,
-                    googleCredential.ToChannelCredentials());
-
-                var client = DatastoreClient.Create(channel);
-                var datastoreDb = DatastoreDb.Create(option.Value.ProjectId, option.Value.Namespace, client);
-                IDatastoreDatabase database = new DatastoreDatabase(datastoreDb, option.Value.EntityPrefix);
-
-                Client = database.GetKind<Client>(option.Value.Client.Kind);
-                ApiResource = database.GetKind<ApiResource>(option.Value.ApiResource.Kind);
-                IdentityResource = database.GetKind<IdentityResource>(option.Value.IdentityResource.Kind);
-            }
+            Client = database.GetKind<Client>(option.Value.Client.Kind);
+            ApiResource = database.GetKind<ApiResource>(option.Value.ApiResource.Kind);
+            IdentityResource = database.GetKind<IdentityResource>(option.Value.IdentityResource.Kind);
         }
 
-        public IDatastoreKind<ApiResource> ApiResource { get; private set; }
-        public IDatastoreKind<Client> Client { get; private set; }
-        public IDatastoreKind<IdentityResource> IdentityResource { get; private set; }
+        public IDatastoreKind<ApiResource> ApiResource { get; }
+        public IDatastoreKind<Client> Client { get; }
+        public IDatastoreKind<IdentityResource> IdentityResource { get; }
     }
 
 
@@ -49,23 +37,11 @@ namespace Spitfyr.IdentityServer4.GcpDS.DbContext
 
     public class OperationDbContext : IOperationDbContext
     {
-        public OperationDbContext(IOptions<OperationGcpDatastoreOption> option)
+        public OperationDbContext(IDatastoreDatabase database, IOptions<OperationGcpDatastoreOption> option)
         {
-            using (var stream = new FileStream(option.Value.CredentialsFilePath, FileMode.Open))
-            {
-                var googleCredential = GoogleCredential.FromStream(stream);
-                var channel = new Grpc.Core.Channel(
-                    DatastoreClient.DefaultEndpoint.Host,
-                    googleCredential.ToChannelCredentials());
-
-                var client = DatastoreClient.Create(channel);
-                var datastoreDb = DatastoreDb.Create(option.Value.ProjectId, option.Value.Namespace, client);
-                IDatastoreDatabase database = new DatastoreDatabase(datastoreDb, option.Value.EntityPrefix);
-
-                PersistedGrant = database.GetKind<PersistedGrant>(option.Value.PersistedGrant.Kind);
-            }
+            PersistedGrant = database.GetKind<PersistedGrant>(option.Value.PersistedGrant.Kind);
         }
 
-        public IDatastoreKind<PersistedGrant> PersistedGrant { get; private set; }
+        public IDatastoreKind<PersistedGrant> PersistedGrant { get; }
     }
 }

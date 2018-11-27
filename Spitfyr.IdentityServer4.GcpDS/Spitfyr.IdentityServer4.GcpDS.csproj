@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
-    <Version>1.0.0.3</Version>
+    <Version>1.0.0.4</Version>
     <Authors>VSS I. T. Development</Authors>
     <Company>VSS I. T. Development</Company>
     <Description>Google Cloud Datastore persistence layer for IdentityServer4. This version supports ASP .Net Core 1.1.</Description>
@@ -11,7 +11,7 @@
     <PackageProjectUrl>https://github.com/spitfyr86/IdentityServer4.GcpDatastore</PackageProjectUrl>
     <RepositoryUrl>https://github.com/spitfyr86/IdentityServer4.GcpDatastore.git</RepositoryUrl>
     <PackageTags>IdentityServer4 gcp datastore .netcore</PackageTags>
-    <PackageReleaseNotes>Optimized resource query and added entity name prefix option.</PackageReleaseNotes>
+    <PackageReleaseNotes>Passed initialized IDatastoreDatabase object instead of re-initializing DB.</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
