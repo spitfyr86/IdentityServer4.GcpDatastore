@@ -1,6 +1,6 @@
 namespace Spitfyr.IdentityServer4.GcpDS
 {
-    public abstract class GcpDatastoreOption
+    public abstract class DatastoreDbOption
     {
         public string CredentialsFilePath { get; set; }
         public string ProjectId { get; set; }
@@ -8,7 +8,7 @@ namespace Spitfyr.IdentityServer4.GcpDS
         public string EntityPrefix { get; set; }
     }
 
-    public class ConfigurationDbOption : GcpDatastoreOption
+    public class ConfigurationDbOption : DatastoreDbOption
     {
         public Option ApiResource { get; set; } = new Option
         {
@@ -26,7 +26,7 @@ namespace Spitfyr.IdentityServer4.GcpDS
         };
     }
 
-    public class OperationGcpDatastoreOption : GcpDatastoreOption
+    public class OperationGcpDatastoreOption : DatastoreDbOption
     {
         public Option PersistedGrant { get; set; } = new Option
         {
